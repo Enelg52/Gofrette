@@ -1,14 +1,17 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"fmt"
 	"io"
 	"net"
 	"os"
+	"strings"
 )
 
 func Listen(port *int) {
+	reader := bufio.NewReader(os.Stdin)
 	address := fmt.Sprintf(":%d",*port)
 	l, err := net.Listen("tcp", address)
 	if nil != err {
@@ -20,6 +23,8 @@ func Listen(port *int) {
 	for {
 		c, _ := l.Accept()
 		session++
+		cmd,_ := reader.ReadString('\n')
+		cmd = strings.TrimSuffix(cmd,"\n")
 		shell(c,session)
 	}
 }
