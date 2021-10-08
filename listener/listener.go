@@ -16,12 +16,18 @@ func Listen(port *int) {
 	}
 	defer l.Close()
 	fmt.Printf("Listening on %d", *port)
+	session := 0;
 	for {
 		c, _ := l.Accept()
-		fmt.Println("\nAccepted connection from", c.RemoteAddr())
+		session++
+		shell(c,session)
+	}
+}
+
+func shell(c net.Conn, session int){
+		fmt.Println("\nAccepted connection from", c.RemoteAddr(), "on session",session)
 		go io.Copy(c, os.Stdin)
 		go io.Copy(os.Stdout, c)
-	}
 }
 
 func main() {
