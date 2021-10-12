@@ -9,6 +9,11 @@
 
 Gofrette is a reverse shell payload developed in Golang that bypasses Windows defender and many others anti-virus.
 
+<p align="center">
+  <a href="" rel="noopener">
+ <img src="https://antiscan.me/images/result/d0BjYStMLkBs.png"> </a>
+</p>
+
 
 ## Installation
 
