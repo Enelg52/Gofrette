@@ -1,17 +1,14 @@
 package main
 
 import (
-	"bufio"
 	"flag"
 	"fmt"
 	"io"
 	"net"
 	"os"
-	"strings"
 )
 
 func Listen(port *int) {
-	reader := bufio.NewReader(os.Stdin)
 	address := fmt.Sprintf(":%d",*port)
 	l, err := net.Listen("tcp", address)
 	if nil != err {
@@ -21,8 +18,6 @@ func Listen(port *int) {
 	fmt.Printf("Listening on %d", *port)
 	for {
 		c, _ := l.Accept()
-		cmd,_ := reader.ReadString('\n')
-		cmd = strings.TrimSuffix(cmd,"\n")
 		shell(c)
 	}
 }
@@ -30,6 +25,7 @@ func Listen(port *int) {
 func shell(c net.Conn){
 	fmt.Println("\nAccepted connection from", c.RemoteAddr())
 	go io.Copy(c, os.Stdin)
+	go io.Copy(os.Stdin, c)
 }
 
 func main() {
