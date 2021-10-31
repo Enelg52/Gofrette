@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	s "github.com/gofrette/shell"
+	s "github/Gofrette/shell"
 )
 
 func main() {
