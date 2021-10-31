@@ -3,7 +3,7 @@ package shell
 import (
 	"bufio"
 	"fmt"
-	d "github/Gofrette/dump"
+	d "github.com/Enelg52/Gofrette/dump"
 	"net"
 	"os"
 	"os/exec"
