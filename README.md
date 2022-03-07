@@ -25,7 +25,7 @@ https://github.com/Enelg52/Gofrette/releases
 ## Example
 #### Target :
 ```raw
-PS C:\Users\enelg> go run .\gofrette.exe -a 127.0.0.1 -p 1234
+PS C:\Users\enelg> .\gofrette.exe -a 127.0.0.1 -p 1234
 [-] Trying to connect to 127.0.0.1:1234
 [+] Connected... :)
 [-] Closed... :(
