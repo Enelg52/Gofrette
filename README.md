@@ -19,7 +19,7 @@ https://github.com/Enelg52/Gofrette/releases
 ```bash
 .\gofrette.exe -a [ipadress] -p [port]
 
-.\127.0.0.1_1234.exe
+.\[ipadress]_[port].exe
 ```
 
 ## Example
