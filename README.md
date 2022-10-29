@@ -7,7 +7,7 @@
 
 # Gofrette
 
-Gofrette is a reverse shell payload developed in Golang that bypasses Windows defender (18.2.2022). It also supports network cuts.  
+Gofrette is a reverse shell payload developed in Golang that bypasses Windows defender (29.10.2022). It also supports network and also works on linux.   
 
 
 
